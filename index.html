@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Suspended | Qodexcore</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .suspension-card {
+            background: white;
+            border-radius: 20px;
+            padding: 50px 40px;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .suspension-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, #ff6b6b, #ff4757);
+        }
+
+        .icon-container {
+            width: 100px;
+            height: 100px;
+            background: #fee;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            border: 4px solid #ff4757;
+        }
+
+        .suspension-icon {
+            width: 50px;
+            height: 50px;
+            background: #ff4757;
+            border-radius: 50%;
+            position: relative;
+            animation: pulse 2s infinite;
+        }
+
+        .suspension-icon::before,
+        .suspension-icon::after {
+            content: '';
+            position: absolute;
+            background: white;
+            width: 30px;
+            height: 4px;
+            border-radius: 2px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .suspension-icon::before {
+            transform: translate(-50%, -50%) rotate(45deg);
+        }
+
+        .suspension-icon::after {
+            transform: translate(-50%, -50%) rotate(-45deg);
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(255, 71, 87, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 20px rgba(255, 71, 87, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(255, 71, 87, 0);
+            }
+        }
+
+        h1 {
+            color: #2d3436;
+            font-size: 32px;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .status-badge {
+            background: #ff4757;
+            color: white;
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .message {
+            color: #2d3436;
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            padding: 0 10px;
+        }
+
+        .reason-box {
+            background: #fff5f5;
+            border: 1px solid #ffc9c9;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .reason-title {
+            color: #c92a2a;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .reason-title span {
+            background: #ff4757;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+
+        .reason-text {
+            color: #2d3436;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .deadline-info {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 15px;
+            border-left: 4px solid #ff4757;
+        }
+
+        .deadline-info p {
+            color: #495057;
+            font-size: 15px;
+            margin: 5px 0;
+        }
+
+        .deadline-info strong {
+            color: #c92a2a;
+        }
+
+        .contact-section {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 1px solid #e9ecef;
+        }
+
+        .contact-section h3 {
+            color: #2d3436;
+            font-size: 20px;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .contact-methods {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .contact-method {
+            flex: 1;
+            min-width: 200px;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .contact-method:hover {
+            transform: translateY(-3px);
+        }
+
+        .contact-method .label {
+            color: #636e72;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .contact-method .value {
+            color: #2d3436;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .contact-method .value a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .contact-method .value a:hover {
+            text-decoration: underline;
+        }
+
+        .support-note {
+            background: #e7f5ff;
+            border-left: 4px solid #339af0;
+            padding: 15px 20px;
+            border-radius: 8px;
+            text-align: left;
+            margin-top: 20px;
+        }
+
+        .support-note p {
+            color: #1864ab;
+            margin: 0;
+            font-size: 15px;
+            line-height: 1.5;
+        }
+
+        .footer {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .powered-by {
+            color: #adb5bd;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+        }
+
+        .powered-by strong {
+            color: #667eea;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .account-info {
+            color: #868e96;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        .account-info a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .account-info a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 600px) {
+            .suspension-card {
+                padding: 30px 20px;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+            
+            .message {
+                font-size: 16px;
+            }
+            
+            .contact-method {
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="suspension-card">
+        <div class="icon-container">
+            <div class="suspension-icon"></div>
+        </div>
+        
+        <span class="status-badge">Account Suspended</span>
+        
+        <h1>Temporary Access Suspension</h1>
+        
+        <p class="message">
+            We've temporarily suspended access to your system. Our team is here to help you resolve this promptly.
+        </p>
+
+        <div class="reason-box">
+            <div class="reason-title">
+                <span>⏰</span> Reason for Suspension
+            </div>
+            <div class="reason-text">
+                Your account has been suspended because the subscription payment deadline has passed. 
+                This is a standard security measure to ensure uninterrupted service for all our users.
+            </div>
+            <div class="deadline-info">
+                <p><strong>📅 Payment Deadline:</strong> Passed</p>
+                <p><strong>🔒 Status:</strong> Access restricted until payment is processed</p>
+                <p><strong>⚡ Next Step:</strong> Please contact our support team to arrange payment and restore access</p>
+            </div>
+        </div>
+
+        <div class="contact-section">
+            <h3>📬 Contact Support for Restoration</h3>
+            
+            <div class="contact-methods">
+                <div class="contact-method">
+                    <span class="label">📧 Email Support</span>
+                    <div class="value">
+                        <a href="mailto:support@qodexcore.com">admin@qodexcore.com</a>
+                    </div>
+                </div>
+                
+                <div class="contact-method">
+                    <span class="label">📞 Phone Support</span>
+                    <div class="value">
+                        <a href="tel:0540770568">0540770568</a>
+                    </div>
+                </div>
+                
+                <div class="contact-method">
+                    <span class="label">💬 Business Hours</span>
+                    <div class="value">
+                        Every Day, 9AM-6PM GMT
+                    </div>
+                </div>
+            </div>
+
+            <div class="support-note">
+                <p>
+                    <strong>ℹ️ How to restore access:</strong> Contact our support team. 
+                    They will guide you through the payment process and restore access within 5 mins of payment confirmation.
+                </p>
+            </div>
+        </div>
+
+
+        <div class="footer">
+            <div class="powered-by">
+                Powered by <strong>QODEXCORE TECHNOLOGIES</strong>
+            </div>
+            <!-- <div style="color: #adb5bd; font-size: 12px; margin-top: 10px;">
+                © 2025 Qodexcore Technologies. All rights reserved.
+            </div> -->
+        </div>
+    </div>
+</body>
+</html>
